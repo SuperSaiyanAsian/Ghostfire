@@ -1,6 +1,6 @@
 import pygame
 
-# Helper function to draw the ghost
+# Draw a ghost
 def draw_ghost(surface, color, center, width = 40, height = 50):
     # Midpoint coordinates of the ghost
     x, y = center
