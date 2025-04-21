@@ -1,5 +1,6 @@
 import pygame
 
+# Initialize Game
 pygame.init()
 
 # Game Window Dimensions
@@ -14,6 +15,7 @@ pygame.display.set_caption('Ghostfire')
 
 # Game Loop
 running = True
+clock = pygame.time.Clock()
 
 while running:
 
@@ -25,4 +27,8 @@ while running:
     # Ensure game window is always up to date
     pygame.display.update()
 
+    # Set max frame rate of 60fps
+    clock.tick(60)
+
+# Exit Game
 pygame.quit()
