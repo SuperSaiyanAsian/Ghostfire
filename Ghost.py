@@ -5,18 +5,28 @@ def draw_ghost(surface, color, center, width = 40, height = 50):
     # Midpoint coordinates of the ghost
     x, y = center
 
-    # Determine dimensions for the ghost
-    head_radius = width / 2             # Radius is half the width so the head covers the full width of the ghost
-    head_center = (x, y - height / 4)   # Center of the head
-    base_bottom = y + height / 4        # Base y-coordinate for the bottom of the ghost
-    spike_depth = height / 6            # How deep the body spikes go
-
     # Draw the head using a circle
+    head_radius = width / 2     
+    head_center = (x, y - height / 4)
     pygame.draw.circle(surface, color, head_center, head_radius)
+
+    # Draw the eyes using circles
+    eye_radius = head_radius / 4
+    left_eye_pos = (head_center[0] - head_radius / 2, head_center[1] - eye_radius)
+    right_eye_pos = (head_center[0] + head_radius / 2, head_center[1] - eye_radius)
+    pygame.draw.circle(surface, 'White', left_eye_pos, eye_radius)
+    pygame.draw.circle(surface, 'White', right_eye_pos, eye_radius)
+
+    # Draw the pupils using circles
+    pupil_radius = eye_radius / 2
+    pygame.draw.circle(surface, 'Black', left_eye_pos, pupil_radius)
+    pygame.draw.circle(surface, 'Black', right_eye_pos, pupil_radius)
 
     # The body starts at the left head point, 
     # moves through a series of points to create a spiky bottom,
     # then goes back up to the right head point
+    base_bottom = y + height / 4     
+    spike_depth = height / 6
     body_points = [
         (x - head_radius, head_center[1]),                      # Left of head
         (x - head_radius * 0.8, base_bottom + spike_depth),     # Down
@@ -52,7 +62,8 @@ class Ghost:
         self.x += self.speed_x
         self.y += self.speed_y
 
-        # Check if the ghost’s bounding box touches the left or right edges of the screen, reversing speed accordingly to bounce
+        # Check if the ghost’s bounding box touches the left or right edges of the screen
+        # If so, reverse speed accordingly in order to bounce off the edges
         if self.x - self.width/2 <= 0 or self.x + self.width/2 >= screen_width:
             self.speed_x = -self.speed_x
         if self.y - self.height/2 <= 0 or self.y + self.height/2 >= screen_height:
