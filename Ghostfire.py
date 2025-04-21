@@ -2,6 +2,7 @@ import pygame
 import random
 
 from Ghost import Ghost
+from Gun import Gun
 
 # Initialize Game
 pygame.init()
@@ -44,11 +45,22 @@ def create_ghosts(num_ghosts):
 
 def main():
     running = True
+
+    gun_pos = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 20)
+    gun_length = 50
+    gun = Gun(gun_pos, gun_length)
+
     ghosts = create_ghosts(10)
 
     while running:
         # Clear the screen by filling it with black before drawing the new frame
         screen.fill('Black')
+
+        # Get mouse position (used for aiming the gun)
+        mouse_pos = pygame.mouse.get_pos()
+
+        # Draw the gun
+        gun.draw(screen, mouse_pos)  
 
         # Event Handler
         for event in pygame.event.get():

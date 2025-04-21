@@ -10,7 +10,7 @@ def draw_ghost(surface, color, center, width = 40, height = 50):
     head_center = (x, y - height / 4)
     pygame.draw.circle(surface, color, head_center, head_radius)
 
-    # Draw the eyes using circles
+    # Draw the eyes (sclerae) using circles
     eye_radius = head_radius / 4
     left_eye_pos = (head_center[0] - head_radius / 2, head_center[1] - eye_radius)
     right_eye_pos = (head_center[0] + head_radius / 2, head_center[1] - eye_radius)
@@ -44,9 +44,9 @@ def draw_ghost(surface, color, center, width = 40, height = 50):
     # Draw the body using a polygon
     pygame.draw.polygon(surface, color, body_points)
 
-# Ghost class representing an individual ghost with movement, drawing, and collision behaviors
+# Ghost class defining a ghost's movement, drawing, and collision detection
 class Ghost:
-    # Initializes new Ghost instances
+    # Initialize new Ghost instances
     def __init__(self, x, y, color, speed_x, speed_y, width = 40, height = 50):
         self.x = x
         self.y = y
