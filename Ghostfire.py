@@ -28,7 +28,7 @@ def create_ghosts(num_ghosts):
     for _ in range(num_ghosts):
         # Randomly select x and y coordinates within the screen such that ghosts are not spawned too close to the sides and bottom
         x = random.randint(40, SCREEN_WIDTH - 40)
-        y = random.randint(40, SCREEN_HEIGHT - 200)
+        y = random.randint(50, SCREEN_HEIGHT - 200)
 
         # Randomly choose speeds
         speed_x = random.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])

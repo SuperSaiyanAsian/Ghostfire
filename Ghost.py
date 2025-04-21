@@ -5,27 +5,34 @@ def draw_ghost(surface, color, center, width = 40, height = 50):
     # Midpoint coordinates of the ghost
     x, y = center
 
-    # Calculate the top-left (tl) corner coordinates of the bounding box for the ghost
-    tl_x = x - width / 2
-    tl_y = y - height / 2
+    # Determine dimensions for the ghost
+    head_radius = width / 2             # Radius is half the width so the head covers the full width of the ghost
+    head_center = (x, y - height / 4)   # Center of the head
+    base_bottom = y + height / 4        # Base y-coordinate for the bottom of the ghost
+    spike_depth = height / 6            # How deep the body spikes go
 
-    # List of points that outline the shape of the ghost (values are fractional multiples of the width and height, making the shape scaleable)
-    points = [
-        (tl_x, tl_y + height * 0.5),
-        (tl_x + width * 0.2, tl_y),
-        (tl_x + width * 0.8, tl_y),
-        (tl_x + width, tl_y + height * 0.5),
-        (tl_x + width * 0.9, tl_y + height * 0.85),
-        (tl_x + width * 0.75, tl_y + height * 0.75),
-        (tl_x + width * 0.60, tl_y + height),
-        (tl_x + width * 0.50, tl_y + height * 0.8),
-        (tl_x + width * 0.40, tl_y + height),
-        (tl_x + width * 0.25, tl_y + height * 0.75),
-        (tl_x + width * 0.10, tl_y + height * 0.85)
+    # Draw the head using a circle
+    pygame.draw.circle(surface, color, head_center, head_radius)
+
+    # The body starts at the left head point, 
+    # moves through a series of points to create a spiky bottom,
+    # then goes back up to the right head point
+    body_points = [
+        (x - head_radius, head_center[1]),                      # Left of head
+        (x - head_radius * 0.8, base_bottom + spike_depth),     # Down
+        (x - head_radius * 0.6, base_bottom - spike_depth),     # Up
+        (x - head_radius * 0.4, base_bottom + spike_depth),     # Down
+        (x - head_radius * 0.2, base_bottom - spike_depth),     # Up
+        (x, base_bottom + spike_depth),                         # Down (Center)
+        (x + head_radius * 0.2, base_bottom - spike_depth),     # Up
+        (x + head_radius * 0.4, base_bottom + spike_depth),     # Down
+        (x + head_radius * 0.6, base_bottom - spike_depth),     # Up
+        (x + head_radius * 0.8, base_bottom + spike_depth),     # Down
+        (x + head_radius, head_center[1])                       # Right of head
     ]
 
-    # Draw the ghost shape on the specified surface using the defined color and points
-    pygame.draw.polygon(surface, color, points)
+    # Draw the body using a polygon
+    pygame.draw.polygon(surface, color, body_points)
 
 # Ghost class representing an individual ghost with movement, drawing, and collision behaviors
 class Ghost:
