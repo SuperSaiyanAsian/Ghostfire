@@ -22,3 +22,6 @@ class Gun:
 
         # Draw the gun's barrel (white line)
         pygame.draw.line(surface, 'White', self.base_pos, (tip_x, tip_y), 9)
+
+        # Return the angle so it can be used when firing bullets
+        return angle  
