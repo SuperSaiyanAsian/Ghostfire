@@ -2,6 +2,7 @@ import pygame
 
 # Initialize Game
 pygame.init()
+clock = pygame.time.Clock()
 
 # Game Window Dimensions
 SCREEN_WIDTH = 1080
@@ -15,7 +16,6 @@ pygame.display.set_caption('Ghostfire')
 
 # Game Loop
 running = True
-clock = pygame.time.Clock()
 
 while running:
 
