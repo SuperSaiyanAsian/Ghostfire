@@ -9,14 +9,20 @@ SCREEN_HEIGHT = 720
 # Game Window
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-running = True
+# Game Title
+pygame.display.set_caption('Ghostfire')
 
 # Game Loop
+running = True
+
 while running:
 
     # Event Handler
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: # 'X'/Close Window Button is Clicked
             running = False
+
+    # Ensure game window is always up to date
+    pygame.display.update()
 
 pygame.quit()
