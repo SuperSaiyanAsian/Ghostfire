@@ -31,8 +31,8 @@ def create_ghosts(num_ghosts):
         y = random.randint(40, SCREEN_HEIGHT - 200)
 
         # Randomly choose speeds
-        speed_x = random.choice([-3, -2, -1, 1, 2, 3])
-        speed_y = random.choice([-3, -2, -1, 1, 2, 3])
+        speed_x = random.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+        speed_y = random.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
 
         # Randomly assign color (30% chance to be blue)
         color = 'Blue' if random.random() < 0.3 else 'Red'
