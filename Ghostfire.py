@@ -47,6 +47,8 @@ def create_ghosts(num_ghosts):
 
 def main():
     running = True
+    victory = False
+    defeat = False
 
     ghost_amount = 10
     ghosts = create_ghosts(ghost_amount)
@@ -56,6 +58,9 @@ def main():
     gun_pos = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 20)
     gun_length = 50
     gun = Gun(gun_pos, gun_length)
+
+    # Set font for victory/defeat message
+    font = pygame.font.Font(None, 80)
 
     while running:
         # Clear the screen by filling it with black before drawing the new frame
@@ -74,7 +79,7 @@ def main():
                 running = False
 
             #  Mouse button is clicked
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN and not victory and not defeat:
                 # Calculate bullet's starting position
                 bullet_start_x = gun_pos[0] + gun.barrel_length * math.cos(gun_angle)
                 bullet_start_y = gun_pos[1] + gun.barrel_length * math.sin(gun_angle)
@@ -88,7 +93,9 @@ def main():
 
         # Draw ghosts accordingly
         for ghost in ghosts:
-            ghost.update(SCREEN_WIDTH, SCREEN_HEIGHT)
+            if not victory and not defeat: 
+                ghost.update(SCREEN_WIDTH, SCREEN_HEIGHT)
+            
             ghost.draw(screen)
 
         # Draw bullets accordingly
@@ -103,12 +110,29 @@ def main():
                 for ghost in ghosts:
                     # Destroy ghost if hit
                     if ghost.is_hit((bullet.x, bullet.y)):
+                        # If a blue ghost was hit, then the player loses
+                        if ghost.color == 'Blue': 
+                            defeat = True
+                        
+                        # Destroy ghost
                         ghosts.remove(ghost)
 
                         # Destroy the bullet that hit the ghost
                         if bullet in bullets:
                             bullets.remove(bullet)
                         break
+
+        # Player wins when there are no more blue ghosts and a blue ghost has never been hit
+        if not any(ghost.color != 'Blue' for ghost in ghosts) and not defeat:
+            victory = True
+
+        # Display victory or defeat message
+        if defeat:
+            text = font.render("Game Over...", True, 'Red')
+            screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, (SCREEN_HEIGHT - text.get_height()) / 2))
+        elif victory:
+            text = font.render("You Won!", True, 'White')
+            screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, (SCREEN_HEIGHT - text.get_height()) / 2))
 
         # Ensure game window is always up to date
         pygame.display.update()
