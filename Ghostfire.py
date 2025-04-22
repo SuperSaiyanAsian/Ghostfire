@@ -50,6 +50,10 @@ def create_ghosts(num_ghosts):
         # Randomly assign color (30% chance to be blue)
         color = 'Blue' if random.random() < 0.3 else 'Red'
 
+        # Ensure at least one ghost is blue
+        if not ghosts:
+            color = 'Blue'
+
         # Create ghost according to randomized parameters and append it to the list
         ghosts.append(Ghost(x, y, color, speed_x, speed_y))
 
