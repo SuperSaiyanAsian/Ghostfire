@@ -1,7 +1,8 @@
 # Ghostfire
 
-**Ghostfire** is a fun, open‑source arcade game built with [Pygame](https://www.pygame.org/).
-In this game, you control a stationary gun located at the bottom of the screen. Your goal is to shoot red ghosts while avoiding blue ghosts. The game features cool background music, sound effects for firing, and certain sounds upon victory or defeat.
+**Ghostfire** is a fun, open‑source arcade game built with [Pygame](https://www.pygame.org/).  
+In this game, you control a stationary gun located at the bottom of the screen. Your goal is to shoot red ghosts while avoiding blue ghosts.  
+The game features cool background music, sound effects for firing, and certain sounds upon victory or defeat.
 
 ## Features
 
@@ -24,9 +25,22 @@ In this game, you control a stationary gun located at the bottom of the screen. 
 - **Pygame (version 2.x is recommended)**
 - Additional standard libraries: `sys`, `random`, `math` (which are included with Python)
 
-### Steps
+### Steps (Non-Technical Method)
 
-1. **Clone the Repository:**
+1. **Clone the Repository**
+
+- Click on the green code button towards the top of the page
+- Click on Download ZIP
+
+2. **Extract the Downloaded ZIP File**
+
+3. **Run the Game**
+
+- Run the Ghostfire.exe executable
+
+### Steps (Technical Method)
+
+1. **Clone the Repository**
 
    ```bash
    git clone https://github.com/yourusername/Ghostfire.git
@@ -35,7 +49,11 @@ In this game, you control a stationary gun located at the bottom of the screen. 
 
 2. **Install Dependencies**
 
-3. **Run the Game:**
+   ```bash
+   pip install pygame
+   ```
+
+3. **Run the Game**
 
    ```bash
    py -u .\Ghostfire.py
