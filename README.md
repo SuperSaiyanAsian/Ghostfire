@@ -1,6 +1,6 @@
 # Ghostfire
 
-**Ghostfire** is a fun, open‑source arcade game built with [Pygame](https://www.pygame.org/).  
+**Ghostfire** is a simple, fun, open‑source arcade game built with [Pygame](https://www.pygame.org/).  
 In this game, you control a stationary gun located at the bottom of the screen. Your goal is to shoot red ghosts while avoiding blue ghosts.  
 The game features cool background music, sound effects for firing, and certain sounds upon victory or defeat.
 
