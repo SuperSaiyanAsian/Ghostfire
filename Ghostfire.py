@@ -8,7 +8,17 @@ from Gun import Gun
 
 # Initialize Game
 pygame.init()
+pygame.mixer.init()
 clock = pygame.time.Clock()
+
+# Load background music and start playing it
+pygame.mixer.music.load("Cyberpunk Moonlight Sonata.mp3")   # https://opengameart.org/content/cyberpunk-moonlight-sonata
+pygame.mixer.music.play(-1)                                 # Infinite loop
+
+# Load sound effects
+gunshot_sound = pygame.mixer.Sound("Gunshot.wav")                 # https://opengameart.org/content/shots
+game_over_sound = pygame.mixer.Sound("Game Over.wav")             # https://opengameart.org/content/game-over-bad-chest-sfx
+win_sound = pygame.mixer.Sound("Win.ogg")                         # https://opengameart.org/content/new-thing-get
 
 # Game Window Dimensions
 SCREEN_WIDTH = 1080
@@ -62,6 +72,9 @@ def main():
     # Set font for victory/defeat message
     font = pygame.font.Font(None, 80)
 
+    # Flag to check that music has been stopped
+    music_stopped = False
+
     while running:
         # Clear the screen by filling it with black before drawing the new frame
         screen.fill('Black')
@@ -80,6 +93,9 @@ def main():
 
             #  Mouse button is clicked
             elif event.type == pygame.MOUSEBUTTONDOWN and not victory and not defeat:
+                # Play gunshot sound
+                gunshot_sound.play()
+
                 # Calculate bullet's starting position
                 bullet_start_x = gun_pos[0] + gun.barrel_length * math.cos(gun_angle)
                 bullet_start_y = gun_pos[1] + gun.barrel_length * math.sin(gun_angle)
@@ -128,9 +144,27 @@ def main():
 
         # Display victory or defeat message
         if defeat:
+            if not music_stopped:
+                # Stop background music
+                pygame.mixer.music.stop()
+
+                # Play defeat sound
+                game_over_sound.play()
+                music_stopped = True
+
+            # Display defeat message
             text = font.render("Game Over...", True, 'Red')
             screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, (SCREEN_HEIGHT - text.get_height()) / 2))
         elif victory:
+            if not music_stopped:
+                # Stop background music
+                pygame.mixer.music.stop()
+
+                # Play victory sound
+                win_sound.play()
+                music_stopped = True
+
+            # Display victory message
             text = font.render("You Won!", True, 'White')
             screen.blit(text, ((SCREEN_WIDTH - text.get_width()) / 2, (SCREEN_HEIGHT - text.get_height()) / 2))
 
