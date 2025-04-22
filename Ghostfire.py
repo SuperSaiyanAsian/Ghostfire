@@ -12,13 +12,13 @@ pygame.mixer.init()
 clock = pygame.time.Clock()
 
 # Load background music and start playing it
-pygame.mixer.music.load("Cyberpunk Moonlight Sonata.mp3")   # https://opengameart.org/content/cyberpunk-moonlight-sonata
-pygame.mixer.music.play(-1)                                 # Infinite loop
+pygame.mixer.music.load("BGM.mp3")                      # https://opengameart.org/content/cyberpunk-moonlight-sonata
+pygame.mixer.music.play(-1)                             # Play indefinitely
 
 # Load sound effects
-gunshot_sound = pygame.mixer.Sound("Gunshot.wav")                 # https://opengameart.org/content/shots
-game_over_sound = pygame.mixer.Sound("Game Over.wav")             # https://opengameart.org/content/game-over-bad-chest-sfx
-win_sound = pygame.mixer.Sound("Win.ogg")                         # https://opengameart.org/content/new-thing-get
+gunshot_sound = pygame.mixer.Sound("Gunshot.wav")       # https://opengameart.org/content/shots
+win_sound = pygame.mixer.Sound("Win.ogg")               # https://opengameart.org/content/new-thing-get
+lose_sound = pygame.mixer.Sound("Lose.wav")             # https://opengameart.org/content/game-over-bad-chest-sfx
 
 # Game Window Dimensions
 SCREEN_WIDTH = 1080
@@ -149,7 +149,7 @@ def main():
                 pygame.mixer.music.stop()
 
                 # Play defeat sound
-                game_over_sound.play()
+                lose_sound.play()
                 music_stopped = True
 
             # Display defeat message
